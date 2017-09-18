@@ -41,4 +41,3 @@ function run-main
     }
 }
 
-run-main
