@@ -22,8 +22,14 @@ function get-response
 
 
 # write data into influxDB
-function write-influxDB($ms, $servername, $measurement) 
+function write-influxDB
 {
+    Param(
+        [parameter(Mandatory=$true)][int]$ms,
+        [parameter(Mandatory=$true)][string]$servername,
+        [parameter(Mandatory=$true)][string]$measurement
+    )
+    
     $db = 'test_db'
     $body = "$measurement,servername=$servername ms=$ms"
     #$currtime = [int][double]::Parse((Get-Date -UFormat %s))
