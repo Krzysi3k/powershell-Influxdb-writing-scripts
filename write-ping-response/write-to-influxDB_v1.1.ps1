@@ -3,14 +3,15 @@
 function ping-request
 {
     Param(
-        [parameter(Mandatory=$true)][string]$pinghost
+        [parameter(Mandatory=$true)][string]$hostname,
+        [parameter(Mandatory=$true)][string]$alias
     )
 
     $measurement = 'ping_request'
     try
     {
         # get ping response (ms)
-        [int]$ms = (Test-Connection $pinghost -Count 1 -ErrorAction Stop).ResponseTime
+        [int]$ms = (Test-Connection $hostname -Count 1 -ErrorAction Stop).ResponseTime
     }
     catch
     {
@@ -19,8 +20,8 @@ function ping-request
     }
 
     #display output:
-    #Write-Host "$pinghost : $ms`ms"
-    write-influxDB -ms $ms -servername $pinghost -measurement $measurement
+    #Write-Host "$alias : $ms`ms"
+    write-influxDB -ms $ms -servername $alias -measurement $measurement
 }
 
 # write data into influxDB
@@ -40,16 +41,16 @@ function write-influxDB
 
 function run-main
 {
-    $arr = Get-Content C:\testing\ping_devices.log
+    $json = Get-Content .\config.json | ConvertFrom-Json
 
     # run endless loop
     while($true) 
     {
         Clear-Host
         Write-Verbose "sending metrics..." -Verbose
-        foreach($i in $arr)
+        foreach($i in $json.machines)
         {
-            ping-request -pinghost $i
+            ping-request -hostname $i.hostname -alias $i.alias
         }
 
         Start-Sleep -Seconds 10
