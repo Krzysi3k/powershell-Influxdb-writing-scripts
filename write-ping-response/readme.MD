@@ -1,4 +1,4 @@
-- send ping request as job
+- send ping request
 - collect output (ms and hostname)
 - send to InfluxDB (Invoke-WebRequest)
 
