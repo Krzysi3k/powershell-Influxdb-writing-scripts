@@ -1,0 +1,7 @@
+{
+  "machines": [
+		{"hostname":"machine0fqdn", "alias":"machine0ipaddress"},
+		{"hostname":"machine1fqdn", "alias":"machine1ipaddress"},
+		{"hostname":"machine2fqdn", "alias":"machine2ipaddress"}
+  ]
+}
