@@ -1,4 +1,5 @@
 {
+  "database":"ping_request_db",
   "machines": [
 		{"hostname":"machine0fqdn", "alias":"machine0ipaddress"},
 		{"hostname":"machine1fqdn", "alias":"machine1ipaddress"},
