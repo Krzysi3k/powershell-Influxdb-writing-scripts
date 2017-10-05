@@ -57,7 +57,7 @@ function WriteTo-InfluxDB
     )
 
     $body = "$measurement,servername=$alias ms=$ms"
-    $url="http://10.24.69.6:8086/write?db=$database"
+    $url="http://localhost:8086/write?db=$database"
     Invoke-WebRequest -UseBasicParsing -Uri $url -Body $body -method Post | Out-Null
 }
 
