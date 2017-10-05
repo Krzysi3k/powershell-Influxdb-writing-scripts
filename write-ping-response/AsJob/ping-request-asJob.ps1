@@ -29,7 +29,7 @@ function ping-machines
         {
             if($table[$i].ResponseTime -eq $null)
             {
-                # send metrics with minus value
+                # send metrics with minus value (grafana mappings)
                 $ms = -100
                 WriteTo-InfluxDB -database $database -measurement $measurement -ms $ms -alias $json.machines.alias[$i]
                 Write-Host "$($json.machines.alias[$i]) $ms"
