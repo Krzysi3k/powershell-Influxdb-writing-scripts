@@ -13,6 +13,7 @@ function ping-machines
     while($true)
     {
         $job = @()
+        $table = @()
         foreach($h in $json.machines)
         {
             $job += Test-Connection $h.ipaddress -Count 1 -AsJob
@@ -42,6 +43,9 @@ function ping-machines
             }
         }
 
+        # clean unused resources
+        Remove-Job $job
+        Clear-Host
         Start-Sleep -Seconds 10
     }
 }
@@ -58,7 +62,7 @@ function WriteTo-InfluxDB
 
     $body = "$measurement,servername=$alias ms=$ms"
     $url="http://localhost:8086/write?db=$database"
-    Invoke-WebRequest -UseBasicParsing -Uri $url -Body $body -method Post | Out-Null
+    $null = Invoke-WebRequest -UseBasicParsing -Uri $url -Body $body -method Post | Out-Null
 }
 
 
