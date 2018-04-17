@@ -2,4 +2,7 @@
 - collect output (ms and hostname)
 - send to InfluxDB (Invoke-WebRequest)
 
-executing script: powershell.exe -file .\ping-request-asJob.ps1
+executing script:
+```batch
+powershell.exe -file .\ping-request-asJob.ps1
+```
